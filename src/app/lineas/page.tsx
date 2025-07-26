@@ -153,7 +153,6 @@ export default function LineasPage() {
                     <TableHeaderCell>Estaciones</TableHeaderCell>
                     <TableHeaderCell>Estado</TableHeaderCell>
                     <TableHeaderCell>Pasajeros/día</TableHeaderCell>
-                    <TableHeaderCell>Acciones</TableHeaderCell>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -175,18 +174,6 @@ export default function LineasPage() {
                         </Badge>
                       </TableCell>
                       <TableCell>{linea.pasajerosPorDia.toLocaleString()}/día</TableCell>
-                      <TableCell>
-                        <div className="flex space-x-2">
-                          <Button variant="ghost" size="sm" className="flex items-center space-x-1">
-                            <MdVisibility className="w-4 h-4" />
-                            <span>Ver</span>
-                          </Button>
-                          <Button variant="ghost" size="sm" className="flex items-center space-x-1">
-                            <MdEdit className="w-4 h-4" />
-                            <span>Editar</span>
-                          </Button>
-                        </div>
-                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

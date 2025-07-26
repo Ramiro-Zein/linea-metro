@@ -234,7 +234,6 @@ export default function ControlPage() {
                     <TableHeaderCell>Velocidad</TableHeaderCell>
                     <TableHeaderCell>Eficiencia</TableHeaderCell>
                     <TableHeaderCell>Estado</TableHeaderCell>
-                    <TableHeaderCell>Control</TableHeaderCell>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -272,17 +271,7 @@ export default function ControlPage() {
                             {tren.estado}
                           </Badge>
                         </TableCell>
-                        <TableCell>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="text-orange-600 flex items-center space-x-1"
-                            onClick={() => handleControlAction('control_tren', tren.id)}
-                          >
-                            <MdSettings className="w-4 h-4" />
-                            <span>Control</span>
-                          </Button>
-                        </TableCell>
+
                       </TableRow>
                     )
                   })}
