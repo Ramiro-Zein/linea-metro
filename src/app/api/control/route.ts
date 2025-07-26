@@ -7,13 +7,13 @@ export async function POST(request: Request) {
     const { action, trenId, mensaje } = body
 
     // Create an alert for the control action
-    const alerta = await prisma.alerta.create({
+    const alerta = await prisma.alertaSistema.create({
       data: {
         tipo: 'Sistema',
         mensaje: mensaje || `Acción de control: ${action}`,
-        prioridad: 'Media',
-        resuelta: false,
-        centroControlId: 'default-centro' // This should be dynamic based on user
+        nivel: 'Info',
+        estado: 'Activa',
+        origen: trenId ? `Tren ${trenId}` : 'Centro de Control'
       }
     })
 
@@ -37,20 +37,52 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    // Get recent control actions from alerts
-    const alertas = await prisma.alerta.findMany({
-      where: {
-        tipo: 'Sistema'
+    // Get trains with their data
+    const trenes = await prisma.tren.findMany({
+      include: {
+        linea: {
+          select: {
+            nombre: true
+          }
+        },
+        metricas: {
+          orderBy: {
+            createdAt: 'desc'
+          },
+          take: 1
+        }
       },
       orderBy: {
-        fechaCreacion: 'desc'
+        createdAt: 'desc'
+      }
+    })
+
+    // Get active alerts
+    const alertas = await prisma.alertaSistema.findMany({
+      where: {
+        estado: 'Activa'
+      },
+      orderBy: {
+        timestamp: 'desc'
       },
       take: 20
     })
 
-    return NextResponse.json(alertas)
+    // Get monitoring data
+    const monitoreo = await prisma.monitoreoTiempoReal.findMany({
+      orderBy: {
+        timestamp: 'desc'
+      },
+      take: 50
+    })
+
+    return NextResponse.json({
+      trenes,
+      alertas,
+      monitoreo
+    })
   } catch (error) {
-    console.error('Error fetching control actions:', error)
+    console.error('Error fetching control data:', error)
     return NextResponse.json(
       { error: 'Error interno del servidor' },
       { status: 500 }

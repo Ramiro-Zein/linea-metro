@@ -48,18 +48,20 @@ export default function LineasPage() {
   )
 
   const projects = [
-    { nombre: 'Extensión Línea 2', progreso: 75, presupuesto: '$450M', fechaFin: 'Dic 2024' },
-    { nombre: 'Nueva Línea 4', progreso: 45, presupuesto: '$680M', fechaFin: 'Jun 2025' },
-    { nombre: 'Modernización L1', progreso: 90, presupuesto: '$120M', fechaFin: 'Mar 2024' },
-    { nombre: 'Estación Central L6', progreso: 15, presupuesto: '$890M', fechaFin: 'Dic 2030' }
+    { nombre: 'Extensión Línea 12', progreso: 75, presupuesto: '$8,500M MXN', fechaFin: 'Dic 2024' },
+    { nombre: 'Nueva Línea Dorada', progreso: 45, presupuesto: '$12,800M MXN', fechaFin: 'Jun 2025' },
+    { nombre: 'Modernización L1 Rosa', progreso: 90, presupuesto: '$2,300M MXN', fechaFin: 'Mar 2024' },
+    { nombre: 'Ampliación L6 Ferrería', progreso: 15, presupuesto: '$16,700M MXN', fechaFin: 'Dic 2030' }
   ]
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Operativa': return 'success'
       case 'Mantenimiento': return 'warning'
-      case 'En Construcción': return 'info'
-      case 'Planificación': return 'default'
+      case 'En Construcción':
+      case 'EnConstruccion': return 'info'
+      case 'Planificación':
+      case 'Planificacion': return 'default'
       default: return 'default'
     }
   }
@@ -74,9 +76,9 @@ export default function LineasPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Gestión de Líneas Metro</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Metro Ciudad de México - Líneas</h1>
           <p className="text-gray-600 mt-2">
-            Administración y control de líneas de metro del sistema
+            Sistema de Transporte Colectivo - Gestión de líneas y proyectos
           </p>
         </div>
       </div>
@@ -101,7 +103,7 @@ export default function LineasPage() {
         <Card>
           <CardContent className="p-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-yellow-600">{lineas.filter(l => l.estado === 'En Construcción').length}</p>
+              <p className="text-2xl font-bold text-yellow-600">{lineas.filter(l => l.estado === 'En Construcción' || l.estado === 'EnConstruccion').length}</p>
               <p className="text-sm text-gray-600">En Construcción</p>
             </div>
           </CardContent>
