@@ -300,7 +300,7 @@ export default function ViasPage() {
                         <p className="font-medium text-gray-900">{seccion.seccion}</p>
                         <p className="text-sm text-gray-600">{seccion.km}</p>
                       </div>
-                      <Badge variant={getEstadoSeccionColor(seccion.estado) as any} size="sm">
+                      <Badge variant={getEstadoSeccionColor(seccion.estado) as unknown } size="sm">
                         {seccion.estado}
                       </Badge>
                     </div>
@@ -383,7 +383,7 @@ export default function ViasPage() {
                     <TableCell>{sensor.tipo}</TableCell>
                     <TableCell className="font-medium">{sensor.valor}</TableCell>
                     <TableCell>
-                      <Badge variant={getSensorColor(sensor.estado) as any} size="sm">
+                      <Badge variant={getSensorColor(sensor.estado) as unknown } size="sm">
                         {sensor.estado}
                       </Badge>
                     </TableCell>

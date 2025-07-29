@@ -255,7 +255,7 @@ export default function RutasPage() {
                       <TableCell>{ruta.distancia} km</TableCell>
                       <TableCell>{ruta.duracion} min</TableCell>
                       <TableCell>
-                        <Badge variant={getEstadoColor(ruta.estado) as any} size="sm">
+                        <Badge variant={getEstadoColor(ruta.estado) as unknown } size="sm">
                           {ruta.estado}
                         </Badge>
                       </TableCell>
